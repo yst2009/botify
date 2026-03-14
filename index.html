@@ -301,7 +301,7 @@ tr:hover td{background:var(--dark3)}
 .fadeup-2{animation-delay:.2s}
 .fadeup-3{animation-delay:.3s}
 
-/* RESPONSIVE */
+/* ========== RESPONSIVE / MOBILE ========== */
 @media(max-width:900px){
   .footer-grid{grid-template-columns:1fr 1fr}
   .about-grid{grid-template-columns:1fr}
@@ -310,13 +310,105 @@ tr:hover td{background:var(--dark3)}
   .dash-sidebar{display:none}
   .dash-main{margin-right:0;width:100%}
   .auth-right{display:none}
-  .auth-left{padding:24px}
+  .auth-left{padding:40px 24px;justify-content:center}
+  .features-grid{grid-template-columns:1fr}
+  .pricing-grid{grid-template-columns:1fr}
+  .testimonials-grid{grid-template-columns:1fr}
+  .values-grid{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:1fr}
+  .pricing-card.featured{transform:scale(1)}
 }
+
 @media(max-width:600px){
-  .kpi-grid{grid-template-columns:1fr 1fr}
-  .quick-actions{grid-template-columns:repeat(2,1fr)}
-  .hero-stats{gap:24px}
+  /* NAV */
   .nav-links .nav-link{display:none}
+  .nav-cta{padding:8px 14px;font-size:13px}
+  .nav-inner{padding:0 16px}
+
+  /* HERO */
+  .hero{padding:100px 16px 60px}
+  .hero-title{font-size:32px !important;line-height:1.2}
+  .hero-sub{font-size:15px}
+  .hero-sub-ar{font-size:13px}
+  .hero-btns{flex-direction:column;align-items:center;gap:12px}
+  .hero-btns .btn-primary,.hero-btns .btn-secondary{width:100%;max-width:320px;justify-content:center}
+  .hero-stats{gap:16px;flex-wrap:wrap}
+  .hero-stats .stat{min-width:80px}
+  .stat-n{font-size:26px}
+  .float-card{display:none}
+
+  /* SECTIONS */
+  section{padding:60px 16px}
+  .section-title{font-size:26px !important}
+  .section-sub{font-size:15px}
+  .container{padding:0}
+
+  /* FEATURES */
+  .features-grid{grid-template-columns:1fr;gap:16px}
+  .feature-card{padding:24px}
+
+  /* STEPS */
+  .steps{grid-template-columns:1fr;gap:24px}
+
+  /* PRICING */
+  .pricing-grid{grid-template-columns:1fr;gap:16px}
+  .pricing-card{padding:28px}
+  .pricing-card.featured{transform:none;margin:0}
+  .pricing-card.featured::after{font-size:10px;padding:3px 12px}
+  .price{font-size:40px}
+
+  /* TESTIMONIALS */
+  .testimonials-grid{grid-template-columns:1fr;gap:16px}
+
+  /* FOOTER */
+  .footer-grid{grid-template-columns:1fr !important}
+  .footer-col{margin-top:8px}
+  footer{padding:40px 16px 24px}
+
+  /* KPI */
+  .kpi-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .kpi-num{font-size:22px}
+  .kpi{padding:14px}
+
+  /* CHARTS */
+  .charts-grid{grid-template-columns:1fr}
+  .quick-actions{grid-template-columns:repeat(2,1fr);gap:10px}
+  .dash-main{padding:16px}
+  .dash-header{flex-direction:column;align-items:flex-start;gap:12px}
+  .dash-title{font-size:20px}
+
+  /* ABOUT */
+  .about-grid{grid-template-columns:1fr}
+  .about-hero{padding:100px 16px 40px}
+  .about-img{padding:24px;font-size:50px}
+  .about-text h2{font-size:26px}
+  .values-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .value-card{padding:16px}
+  .team-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .team-card{padding:16px}
+
+  /* AUTH */
+  .auth-page{flex-direction:column}
+  .auth-right{display:flex !important;width:100%;padding:32px 20px}
+  .auth-left{display:none}
+  .auth-card{max-width:100%}
+  .auth-logo{font-size:22px}
+  .auth-title{font-size:22px}
+  .auth-social{flex-direction:column;gap:8px}
+
+  /* DASHBOARD FEEDBACK */
+  .dash-main > div[style*="grid-template-columns:1fr 1fr 1fr"]{display:block !important}
+  .dash-main > div[style*="grid-template-columns:1fr 1fr"]{display:block !important}
+  .dash-main > div[style*="grid-template-columns:repeat(3"]{display:block !important}
+  .chart-card{margin-bottom:16px}
+}
+
+@media(max-width:380px){
+  .hero-title{font-size:28px !important}
+  .kpi-grid{grid-template-columns:1fr}
+  .values-grid{grid-template-columns:1fr}
+  .team-grid{grid-template-columns:1fr}
+  .quick-actions{grid-template-columns:1fr 1fr}
 }
 </style>
 </head>
@@ -326,12 +418,20 @@ tr:hover td{background:var(--dark3)}
 <nav id="navbar">
   <div class="nav-inner">
     <div class="nav-logo" onclick="showPage('home')">Botify</div>
-    <div class="nav-links">
-      <button class="nav-link active" onclick="showPage('home');setActive(this)">Home</button>
-      <button class="nav-link" onclick="showPage('about');setActive(this)">About</button>
-      <button class="nav-link" onclick="showPage('dashboard');setActive(this)">Dashboard</button>
-      <button class="nav-cta" onclick="showPage('signup')">Get Started →</button>
+    <div class="nav-links" id="nav-links">
+      <button class="nav-link active" onclick="showPage('home');setActive(this);closeMobileMenu()">Home</button>
+      <button class="nav-link" onclick="showPage('about');setActive(this);closeMobileMenu()">About</button>
+      <button class="nav-link" onclick="showPage('dashboard');setActive(this);closeMobileMenu()">Dashboard</button>
+      <button class="nav-cta" onclick="showPage('signup');closeMobileMenu()">Get Started →</button>
     </div>
+    <button id="hamburger" onclick="toggleMobileMenu()" style="display:none;background:none;border:none;color:var(--w);font-size:24px;cursor:pointer;padding:4px 8px">☰</button>
+  </div>
+  <!-- MOBILE MENU -->
+  <div id="mobile-menu" style="display:none;background:rgba(10,10,15,.98);border-top:1px solid var(--border);padding:16px;flex-direction:column;gap:8px">
+    <button onclick="showPage('home');setActive(this);closeMobileMenu()" style="background:none;border:none;color:var(--gray2);font-size:15px;font-weight:600;cursor:pointer;padding:12px 16px;text-align:right;border-radius:10px;font-family:'Inter',sans-serif;width:100%">🏠 Home</button>
+    <button onclick="showPage('about');setActive(this);closeMobileMenu()" style="background:none;border:none;color:var(--gray2);font-size:15px;font-weight:600;cursor:pointer;padding:12px 16px;text-align:right;border-radius:10px;font-family:'Inter',sans-serif;width:100%">ℹ️ About</button>
+    <button onclick="showPage('dashboard');setActive(this);closeMobileMenu()" style="background:none;border:none;color:var(--gray2);font-size:15px;font-weight:600;cursor:pointer;padding:12px 16px;text-align:right;border-radius:10px;font-family:'Inter',sans-serif;width:100%">📊 Dashboard</button>
+    <button onclick="showPage('signup');closeMobileMenu()" style="background:var(--grad);border:none;color:#fff;font-size:15px;font-weight:700;cursor:pointer;padding:12px 16px;border-radius:10px;font-family:'Inter',sans-serif;width:100%;margin-top:4px">Get Started →</button>
   </div>
 </nav>
 
@@ -994,6 +1094,35 @@ tr:hover td{background:var(--dark3)}
 <div id="toast" style="position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--dark3);border:1px solid var(--p1);color:var(--white);padding:12px 24px;border-radius:12px;font-size:14px;font-weight:600;z-index:9999;transition:transform .3s;white-space:nowrap"></div>
 
 <script>
+// ===== HAMBURGER MENU =====
+function toggleMobileMenu() {
+  var menu = document.getElementById('mobile-menu');
+  var ham = document.getElementById('hamburger');
+  var isOpen = menu.style.display === 'flex';
+  menu.style.display = isOpen ? 'none' : 'flex';
+  ham.textContent = isOpen ? '☰' : '✕';
+}
+function closeMobileMenu() {
+  var menu = document.getElementById('mobile-menu');
+  var ham = document.getElementById('hamburger');
+  menu.style.display = 'none';
+  ham.textContent = '☰';
+}
+function checkMobileNav() {
+  var ham = document.getElementById('hamburger');
+  var links = document.getElementById('nav-links');
+  if(window.innerWidth <= 600) {
+    ham.style.display = 'block';
+    links.style.display = 'none';
+  } else {
+    ham.style.display = 'none';
+    links.style.display = 'flex';
+    closeMobileMenu();
+  }
+}
+window.addEventListener('resize', checkMobileNav);
+checkMobileNav();
+
 // ===== SIGNUP FORM =====
 function handleSignup() {
   var name = document.getElementById('f-name').value.trim();
