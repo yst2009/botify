@@ -71,26 +71,7 @@ nav.scrolled{background:rgba(10,10,15,.96);backdrop-filter:blur(20px);border-bot
 .hstat-n{font-size:26px;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .hstat-l{font-size:12px;color:var(--gray);margin-top:3px}
 
-/* FLOATING CARDS — fixed to far right side, stacked vertically */
-.fc{
-  position:fixed;
-  right:20px;
-  background:var(--dark3);
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:14px 18px;
-  backdrop-filter:blur(12px);
-  animation:flt 6s ease-in-out infinite;
-  z-index:2;
-  min-width:150px;
-}
-.fc:nth-child(1){top:calc(50% - 110px);animation-delay:0s}
-.fc:nth-child(2){top:calc(50% - 20px);animation-delay:2s}
-.fc:nth-child(3){top:calc(50% + 70px);animation-delay:4s}
-@keyframes flt{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
-.fc-ico{font-size:20px;margin-bottom:6px}
-.fc-ttl{font-size:12px;font-weight:700}
-.fc-sub{font-size:11px;color:var(--gray);margin-top:2px}
+
 
 /* FEATURES */
 .sec{padding:90px 0}
@@ -165,10 +146,7 @@ footer{background:var(--dark2);border-top:1px solid var(--border);padding:52px 2
 .fu2{animation-delay:.2s}
 .fu3{animation-delay:.3s}
 
-/* RESPONSIVE — tablet (hide cards below 1100px) */
-@media(max-width:1100px){
-  .fc{display:none}
-}
+
 
 /* RESPONSIVE — tablet */
 @media(max-width:900px){
@@ -235,10 +213,7 @@ footer{background:var(--dark2);border-top:1px solid var(--border);padding:52px 2
   </div>
 </nav>
 
-<!-- FLOATING CARDS — outside hero, fixed to right edge -->
-<div class="fc" id="fc1"><div class="fc-ico">🤖</div><div class="fc-ttl">AI Response</div><div class="fc-sub">0.3s avg reply</div></div>
-<div class="fc" id="fc2"><div class="fc-ico">📈</div><div class="fc-ttl">Satisfaction</div><div class="fc-sub">98.7% rate</div></div>
-<div class="fc" id="fc3"><div class="fc-ico">🌍</div><div class="fc-ttl">Languages</div><div class="fc-sub">Arabic + English</div></div>
+
 
 <!-- ===== HOME ===== -->
 <div class="page active" id="pg-home">
@@ -412,12 +387,6 @@ function show(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById('pg-'+id).classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
-  // Show/hide cards only on home page
-  var onHome = id === 'home';
-  ['fc1','fc2','fc3'].forEach(function(fcId){
-    var el = document.getElementById(fcId);
-    if(el) el.style.display = onHome ? '' : 'none';
-  });
 }
 function act(id){
   document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
