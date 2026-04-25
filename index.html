@@ -70,10 +70,23 @@ nav.scrolled{background:rgba(10,10,15,.96);backdrop-filter:blur(20px);border-bot
 .hstat:last-child{border-right:none}
 .hstat-n{font-size:26px;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .hstat-l{font-size:12px;color:var(--gray);margin-top:3px}
-.fc{position:absolute;background:var(--dark3);border:1px solid var(--border);border-radius:14px;padding:14px 18px;backdrop-filter:blur(12px);animation:flt 6s ease-in-out infinite;z-index:2}
-.fc:nth-child(1){top:22%;left:4%;animation-delay:0s}
-.fc:nth-child(2){top:26%;right:4%;animation-delay:2s}
-.fc:nth-child(3){bottom:22%;left:6%;animation-delay:4s}
+
+/* FLOATING CARDS — fixed to far right side, stacked vertically */
+.fc{
+  position:fixed;
+  right:20px;
+  background:var(--dark3);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:14px 18px;
+  backdrop-filter:blur(12px);
+  animation:flt 6s ease-in-out infinite;
+  z-index:2;
+  min-width:150px;
+}
+.fc:nth-child(1){top:calc(50% - 110px);animation-delay:0s}
+.fc:nth-child(2){top:calc(50% - 20px);animation-delay:2s}
+.fc:nth-child(3){top:calc(50% + 70px);animation-delay:4s}
 @keyframes flt{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
 .fc-ico{font-size:20px;margin-bottom:6px}
 .fc-ttl{font-size:12px;font-weight:700}
@@ -152,6 +165,11 @@ footer{background:var(--dark2);border-top:1px solid var(--border);padding:52px 2
 .fu2{animation-delay:.2s}
 .fu3{animation-delay:.3s}
 
+/* RESPONSIVE — tablet (hide cards below 1100px) */
+@media(max-width:1100px){
+  .fc{display:none}
+}
+
 /* RESPONSIVE — tablet */
 @media(max-width:900px){
   .features-grid{grid-template-columns:repeat(2,1fr)}
@@ -159,7 +177,6 @@ footer{background:var(--dark2);border-top:1px solid var(--border);padding:52px 2
   .about-grid{grid-template-columns:1fr}
   .vals-grid{grid-template-columns:repeat(2,1fr)}
   .foot-grid{grid-template-columns:1fr 1fr}
-  .fc{display:none}
   .hero-stats{flex-wrap:wrap;width:auto}
   .hstat{padding:14px 20px}
 }
@@ -218,15 +235,17 @@ footer{background:var(--dark2);border-top:1px solid var(--border);padding:52px 2
   </div>
 </nav>
 
+<!-- FLOATING CARDS — outside hero, fixed to right edge -->
+<div class="fc" id="fc1"><div class="fc-ico">🤖</div><div class="fc-ttl">AI Response</div><div class="fc-sub">0.3s avg reply</div></div>
+<div class="fc" id="fc2"><div class="fc-ico">📈</div><div class="fc-ttl">Satisfaction</div><div class="fc-sub">98.7% rate</div></div>
+<div class="fc" id="fc3"><div class="fc-ico">🌍</div><div class="fc-ttl">Languages</div><div class="fc-sub">Arabic + English</div></div>
+
 <!-- ===== HOME ===== -->
 <div class="page active" id="pg-home">
 
   <div class="hero">
     <div class="hero-bg"></div>
     <div class="hero-grid"></div>
-    <div class="fc"><div class="fc-ico">🤖</div><div class="fc-ttl">AI Response</div><div class="fc-sub">0.3s avg reply</div></div>
-    <div class="fc"><div class="fc-ico">📈</div><div class="fc-ttl">Satisfaction</div><div class="fc-sub">98.7% rate</div></div>
-    <div class="fc"><div class="fc-ico">🌍</div><div class="fc-ttl">Languages</div><div class="fc-sub">Arabic + English</div></div>
     <div class="hero-inner">
       <div class="hero-pill fu"><span></span> AI-Powered Customer Service</div>
       <h1 class="hero-title fu fu1">Automate Your<br><span class="grad-text">Customer Support</span><br><span class="grad2-text">Intelligently</span></h1>
@@ -257,8 +276,7 @@ footer{background:var(--dark2);border-top:1px solid var(--border);padding:52px 2
         <div class="fcard"><span class="fcard-ico">⚡</span><h3>Instant Integration</h3><p>Connect to WhatsApp, website chat, and social media in minutes — no coding required.</p><p class="ar-t ar">اتصال فوري بواتساب والموقع والسوشيال ميديا</p></div>
         <div class="fcard"><span class="fcard-ico">🔒</span><h3>Enterprise Security</h3><p>Bank-grade encryption and compliance with international data protection standards.</p><p class="ar-t ar">أمان على مستوى المؤسسات وحماية البيانات</p></div>
         <div class="fcard"><span class="fcard-ico">🎯</span><h3>Smart Escalation</h3><p>Automatically routes complex issues to human agents when needed — seamlessly.</p><p class="ar-t ar">تحويل ذكي للوكيل البشري عند الحاجة</p></div>
-        <div class="fcard"><span class="fcard-ico">📊</span><h3>Unified Dashboard</h3><p>Manage leads, monitor real-time messages, and track website activity all in one place.</p> <p class="ar-t ar">لوحة تحكم شاملة لإدارة العملاء المحتملين، مراقبة الرسائل، وتحليل نشاط المواقع في مكان واحد.</p>
-</div>
+        <div class="fcard"><span class="fcard-ico">📊</span><h3>Unified Dashboard</h3><p>Manage leads, monitor real-time messages, and track website activity all in one place.</p><p class="ar-t ar">لوحة تحكم شاملة لإدارة العملاء المحتملين، مراقبة الرسائل، وتحليل نشاط المواقع في مكان واحد.</p></div>
       </div>
     </div>
   </div>
@@ -394,6 +412,12 @@ function show(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById('pg-'+id).classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
+  // Show/hide cards only on home page
+  var onHome = id === 'home';
+  ['fc1','fc2','fc3'].forEach(function(fcId){
+    var el = document.getElementById(fcId);
+    if(el) el.style.display = onHome ? '' : 'none';
+  });
 }
 function act(id){
   document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
